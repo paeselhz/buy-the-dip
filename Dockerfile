@@ -7,9 +7,10 @@ RUN install2.r \
     shiny \
     plotly \
     formattable \
-    shinyWidgets
+    shinyWidgets \
+    readr
 
-COPY . /srv/shiny-server/shiny-gcr-tf/
+COPY . /srv/shiny-server/buy-the-dip/
 COPY templates/shiny-server.conf /etc/shiny-server/shiny-server.conf
 
 RUN chmod -R 777 /srv/shiny-server/

@@ -2,6 +2,7 @@ shinyUI(
   fluidPage(
     ##-- Favicon ----
     tags$head(
+      tags$title("Buy The Dip!"),
       tags$link(rel = "shortcut icon", href = "img/logo.ico"),
       #-- biblio js ----
       tags$link(rel="stylesheet", type = "text/css",
@@ -12,7 +13,7 @@ shinyUI(
     ##-- Logo ----
     div(style="padding: 1px 0px; width: '100%'",
         titlePanel(
-          title="", windowTitle = "Buy The Dip!"
+          title = "", windowTitle = "Buy The Dip!"
         )
     ),
     theme = "styles.css",
