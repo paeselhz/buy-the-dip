@@ -9,6 +9,9 @@
 # Weg (WEGE3)	2,55%
 # Itausa (ITSA4)
 
+library(dplyr)
+library(tidyquant)
+
 top_10_ibov <-
   c(
     'VALE3.SA',
@@ -29,8 +32,11 @@ stock_prices_ibov <-
     from = '1990-01-01',
     to = '2021-02-24'
   ) %>% 
+  group_by(symbol) %>% 
   dplyr::mutate(
     daily_return = close/lag(close) - 1
-  )
+  ) %>% 
+  ungroup() %>% 
+  filter(!is.na(daily_return))
 
 readr::write_rds(stock_prices_ibov, 'data/stock_prices_ibov.rds')

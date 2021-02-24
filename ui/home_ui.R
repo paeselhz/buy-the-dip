@@ -43,11 +43,13 @@ home_tab <-
       column(
         width = 6,
         # formattableOutput('formattable_ticker')
-        dataTableOutput('formattable_ticker')
+        dataTableOutput('formattable_ticker') %>% 
+          withSpinner(type = 4, color = "#6aae7a")
       ),
       column(
         width = 6,
-        plotlyOutput('plotly_ticker')
+        plotlyOutput('plotly_ticker') %>% 
+          withSpinner(type = 4, color = "#6aae7a")
       )
     ),
     br(),

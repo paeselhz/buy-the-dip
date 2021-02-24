@@ -4,6 +4,7 @@ library(shiny)
 library(plotly)
 library(formattable)
 library(shinyWidgets)
+library(shinycssloaders)
 
 source('function/generate_drop_data.R')
 
