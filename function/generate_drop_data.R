@@ -3,7 +3,7 @@ library(plotly)
 
 generate_falling_stock_data <-
   function(selected_ticker) {
-      
+    
     top_10_drops <-
       stock_prices_ibov %>% 
       filter(
@@ -19,9 +19,13 @@ generate_falling_stock_data <-
         xaxis = list(title = "Pregões desde a queda",
                      range = c(0, 720)),
         yaxis = list(title = "Retorno acumulado"),
-        legend = list(orientation = 'h',
-                           title = list(text = "<b>Dias de queda</b>"))
-        )
+        legend = list(#orientation = 'h',
+          x = 100,
+          y = 0.5,
+          title = list(text = "<b>Dias de queda</b>")
+        ),
+        margin = list(b = 120)
+      )
     
     returns_df <-
       tibble::tibble()
@@ -38,7 +42,7 @@ generate_falling_stock_data <-
                  symbol == selected_ticker) %>% 
         mutate(
           fall_date = fall$date,
-          fall_quantity = fall$daily_return,
+          fall_quantity = fall$daily_return*100,
           cumulative_return = cumsum(daily_return)*100,
           days_since = order(date)
         ) %>% 
@@ -47,6 +51,7 @@ generate_falling_stock_data <-
         ) %>% mutate(
           text = paste0(
             "<b>", "Dia da Queda: ", fall_date, "</b>", "<br>",
+            "<b>", "Percentual de Queda: ", round(fall_quantity, 2), "%<br>",
             "Data: ", date, "<br>",
             "Dias desde a queda: ", days_since, "<br>",
             "Retorno acumulado desde a queda: ", round(cumulative_return, 2), "%<br>"

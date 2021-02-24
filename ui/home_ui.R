@@ -16,7 +16,7 @@ home_tab <-
                a("@j_felicio1", href = "https://twitter.com/j_felicio1/status/1363917883290640386?s=19", target = "_blank"), 
                " sobre como se comportaram os retornos de PETR4 após grandes quedas.",
                " Pensando nisso, busquei as 10 ações de maior peso no Ibovespa, para analisar como se comportam",
-               " seus retornos após quedas significativas, olhando como essas ações se comportaram em 1, 7, 30, 60, 90, 180, 360 e 720",
+               " seus retornos após quedas significativas, olhando como essas ações se comportaram em 1, 7, 30, 90, 180, 360 e 720",
                " pregões depois (utilizei o numero de pregões ao invés do numero de dias para desconsiderar finais de semana, por isso ",
                " alguns dados podem diferir de outras análises).",
                "</h3>"
@@ -32,9 +32,9 @@ home_tab <-
         individual = TRUE,
         checkIcon = list(
           yes = tags$i(class = "fa fa-circle", 
-                       style = "color: steelblue"),
+                       style = "color: #6aae7a"),
           no = tags$i(class = "fa fa-circle-o", 
-                      style = "color: steelblue"))
+                      style = "color: #6aae7a"))
       ),
       style = 'text-align: center;'
     ),
@@ -42,15 +42,42 @@ home_tab <-
       width = 12,
       column(
         width = 6,
-        formattableOutput('formattable_ticker')
+        # formattableOutput('formattable_ticker')
+        dataTableOutput('formattable_ticker')
       ),
       column(
         width = 6,
         plotlyOutput('plotly_ticker')
       )
     ),
+    br(),
+    br(),
     column(
       width = 12,
-      'App gerado pelo paese'
+      HTML(
+        '<h4><strong>Sobre o desenvolvedor: </strong></h4>'
+      ),  
+      h3(
+        a(
+          href = "https://paeselhz.github.io/",
+          icon("globe"),
+          target = "_blank"
+        ),
+        a(
+          href = "https://linkedin.com/in/lhzpaese",
+          icon("linkedin"),
+          target = "_blank"
+        ),
+        a(
+          href = "https://github.com/paeselhz",
+          icon("github"),
+          target = "_blank"
+        ),
+        a(
+          href = "https://twitter.com/paeselhz",
+          icon("twitter"),
+          target = "_blank"
+        )
+      )
     )
   )

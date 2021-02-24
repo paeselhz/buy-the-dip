@@ -8,12 +8,13 @@ ticker_objects <- reactive({
 })
 
 output$formattable_ticker <-
-  renderFormattable({
+  # renderFormattable({
+  renderDataTable({
     
     ticker_objects()$returns_df %>% 
       dplyr::mutate(
         symbol = stringr::str_remove(symbol, "\\.SA"),
-        fall_date = format(fall_date, "%d/%m/%Y")
+        # fall_date = format(fall_date, "%d/%m/%Y")
       ) %>% 
       mutate_if(is.numeric, ~round(., digits = 2)) %>% 
       select(
@@ -39,6 +40,11 @@ output$formattable_ticker <-
           t180 = formattable_formatter,
           t360 = formattable_formatter,
           t720 = formattable_formatter
+        )
+      ) %>% 
+      as.datatable(
+        options = list(
+          dom = 't'
         )
       )
     
