@@ -8,7 +8,8 @@ RUN install2.r \
     plotly \
     formattable \
     shinyWidgets \
-    readr
+    readr \
+    shinycssloaders
 
 COPY . /srv/shiny-server/buy-the-dip/
 COPY templates/shiny-server.conf /etc/shiny-server/shiny-server.conf
