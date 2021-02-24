@@ -13,7 +13,15 @@ generate_falling_stock_data <-
       head(10)
     
     base_plot <-
-      plot_ly()
+      plot_ly() %>% 
+      layout(
+        title = paste0("Retornos acumulados em t pregões para ", selected_ticker),
+        xaxis = list(title = "Pregões desde a queda",
+                     range = c(0, 720)),
+        yaxis = list(title = "Retorno acumulado"),
+        legend = list(orientation = 'h',
+                           title = list(text = "<b>Dias de queda</b>"))
+        )
     
     returns_df <-
       tibble::tibble()
@@ -31,16 +39,17 @@ generate_falling_stock_data <-
         mutate(
           fall_date = fall$date,
           fall_quantity = fall$daily_return,
-          cumulative_return = cumsum(daily_return),
+          cumulative_return = cumsum(daily_return)*100,
           days_since = order(date)
         ) %>% 
         filter(
           days_since <= 720
         ) %>% mutate(
           text = paste0(
-            date, "<br>",
-            days_since, "<br>",
-            cumulative_return, "<br>"
+            "<b>", "Dia da Queda: ", fall_date, "</b>", "<br>",
+            "Data: ", date, "<br>",
+            "Dias desde a queda: ", days_since, "<br>",
+            "Retorno acumulado desde a queda: ", round(cumulative_return, 2), "%<br>"
           )
         )
       
